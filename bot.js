@@ -3,7 +3,7 @@ const { Telegraf } = require('telegraf');
 const axios = require('axios');
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-const CHANNEL_ID = '@DadJokesGPT'; // Username-ul canalului tău
+const CHANNEL_ID = '@dailyfactsontelegram'; // Username-ul canalului tău
 
 const categories = [
   { type: 'fun', title: '5 Fun Facts about' },
