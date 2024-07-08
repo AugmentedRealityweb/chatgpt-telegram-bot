@@ -6,21 +6,21 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 const CHANNEL_ID = '@DadJokeshourly'; // Username-ul canalului tău
 
 const categories = [
-  'Tell me 5 fun facts.',
-  'Tell me 5 horror facts.',
-  'Tell me 5 interesting facts.'
+  { prompt: 'Tell me 5 fun facts.', title: '5 Fun Facts' },
+  { prompt: 'Tell me 5 horror facts.', title: '5 Horror Facts' },
+  { prompt: 'Tell me 5 interesting facts.', title: '5 Interesting Facts' }
 ];
 
 let previousFacts = new Set(); // Pentru a stoca faptele anterioare și a preveni repetarea
 
 // Funcție pentru a obține fapte de la OpenAI
-const getFacts = async (prompt) => {
+const getFacts = async (category) => {
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
         model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: prompt }],
+        messages: [{ role: 'user', content: category.prompt }],
         max_tokens: 150
       },
       {
@@ -36,7 +36,16 @@ const getFacts = async (prompt) => {
 
     uniqueFacts.forEach(fact => previousFacts.add(fact));
 
-    return uniqueFacts.length > 0 ? uniqueFacts.join('\n') : 'No new facts available right now. Please try again later.';
+    if (uniqueFacts.length === 0) {
+      return 'No new facts available right now. Please try again later.';
+    }
+
+    let formattedFacts = `${category.title}\n\n`;
+    uniqueFacts.forEach((fact, index) => {
+      formattedFacts += `${index + 1}. ${fact}\n\n`;
+    });
+
+    return formattedFacts.trim(); // Eliminăm spațiul suplimentar de la sfârșit
   } catch (error) {
     console.error('Error fetching facts from OpenAI:', error);
     return 'Sorry, I couldn\'t think of any facts right now. Please try again later.';
@@ -46,7 +55,7 @@ const getFacts = async (prompt) => {
 // Funcție pentru a posta automat în canal
 const postToChannel = async () => {
   const category = categories[Math.floor(Math.random() * categories.length)];
-  console.log('Attempting to post to channel with category:', category);
+  console.log('Attempting to post to channel with category:', category.prompt);
 
   const facts = await getFacts(category);
   console.log('Fetched facts:', facts);
