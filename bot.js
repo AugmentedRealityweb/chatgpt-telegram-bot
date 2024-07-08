@@ -3,7 +3,7 @@ const { Telegraf } = require('telegraf');
 const axios = require('axios');
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-const CHANNEL_ID = '@DadJokeshourly'; // Username-ul canalului tău
+const CHANNEL_ID = '@dailyfactsontelegram'; // Username-ul canalului tău
 
 const categories = [
   { prompt: 'Tell me 5 fun facts about the Eiffel Tower.', title: '5 Fun Facts about the Eiffel Tower' },
