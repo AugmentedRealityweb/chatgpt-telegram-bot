@@ -3,7 +3,7 @@ const { Telegraf } = require('telegraf');
 const axios = require('axios');
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
-const CHANNEL_ID = '@DadJokesGPT'; // Username-ul canalului tău
+const CHANNEL_ID = '@DadJokeshourly'; // Username-ul canalului tău
 
 // Funcție pentru a obține o dad joke de la OpenAI
 const getDadJoke = async () => {
