@@ -96,8 +96,8 @@ const postToChannel = async () => {
   }
 };
 
-// Postează un mesaj în canal la fiecare 2 minute
-setInterval(postToChannel, 2 * 60 * 1000); // 2 minute în milisecunde
+// Postează un mesaj în canal la fiecare oră
+setInterval(postToChannel, 60 * 60 * 1000); // 1 oră în milisecunde
 
 bot.launch();
 
