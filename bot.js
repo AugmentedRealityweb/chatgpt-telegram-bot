@@ -21,7 +21,7 @@ const getFacts = async (category) => {
       {
         model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: category.prompt }],
-        max_tokens: 150
+        max_tokens: 200
       },
       {
         headers: {
@@ -31,7 +31,9 @@ const getFacts = async (category) => {
       }
     );
 
-    const facts = response.data.choices[0].message.content.trim().split('\n').filter(fact => fact);
+    let facts = response.data.choices[0].message.content.trim().split('\n').filter(fact => fact);
+    facts = facts.map(fact => fact.replace(/^\d+\.\s*/, '').trim()); // Elimină numerele inițiale
+
     const uniqueFacts = facts.filter(fact => !previousFacts.has(fact));
 
     uniqueFacts.forEach(fact => previousFacts.add(fact));
@@ -41,7 +43,7 @@ const getFacts = async (category) => {
     }
 
     let formattedFacts = `${category.title}\n\n`;
-    uniqueFacts.forEach((fact, index) => {
+    uniqueFacts.slice(0, 5).forEach((fact, index) => {
       formattedFacts += `${index + 1}. ${fact}\n\n`;
     });
 
