@@ -5,7 +5,7 @@ const axios = require('axios');
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
 bot.start((ctx) => {
-  ctx.reply('Salut! Sunt un chatbot alimentat de OpenAI. Întreabă-mă orice!');
+  ctx.reply('Hello! I'm a dad jokes bot. Ask me anything, and I'll tell you a joke!');
 });
 
 bot.on('text', async (ctx) => {
@@ -31,7 +31,7 @@ bot.on('text', async (ctx) => {
     ctx.reply(botReply);
   } catch (error) {
     console.error('Error:', error);
-    ctx.reply('Ne pare rău, a apărut o eroare. Încercați din nou mai târziu.');
+    ctx.reply('Sorry, there was an error, please try again.');
   }
 });
 
