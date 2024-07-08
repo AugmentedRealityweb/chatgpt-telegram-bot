@@ -6,9 +6,9 @@ const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 const CHANNEL_ID = '@DadJokeshourly'; // Username-ul canalului tău
 
 const categories = [
-  { prompt: 'Tell me 5 fun facts.', title: '5 Fun Facts' },
-  { prompt: 'Tell me 5 horror facts.', title: '5 Horror Facts' },
-  { prompt: 'Tell me 5 interesting facts.', title: '5 Interesting Facts' }
+  { prompt: 'Tell me 5 fun facts about the Eiffel Tower.', title: '5 Fun Facts about the Eiffel Tower' },
+  { prompt: 'Tell me 5 horror facts about haunted houses.', title: '5 Horror Facts about Haunted Houses' },
+  { prompt: 'Tell me 5 interesting facts about space.', title: '5 Interesting Facts about Space' }
 ];
 
 let previousFacts = new Set(); // Pentru a stoca faptele anterioare și a preveni repetarea
